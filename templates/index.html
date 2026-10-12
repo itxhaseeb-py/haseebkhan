@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FakerX | Haseeb Khan — Developer Portfolio</title>
+
+    <meta
+        name="description"
+        content="Explore the portfolio of Haseeb Khan, also known as Mr Faker. Python developer focused on automation, AI integrations, backend development, and cybersecurity."
+    >
+
+        <meta name="theme-color" content="#0a0a10">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        /* ===== TOKENS: change the look of the whole site here ===== */
+        :root {
+            --ink: #0a0a10;
+            --surface: #12121b;
+            --surface-2: #191927;
+            --line: #262638;
+            --line-strong: #3a3856;
+            --text: #eceaf6;
+            --soft: #c9c7da;
+            --muted: #9a98b0;
+            --violet: #a58bff;
+            --violet-soft: rgba(165, 139, 255, 0.12);
+            --violet-edge: rgba(165, 139, 255, 0.35);
+            --mint: #66f0c8;
+            --amber: #ffbf69;
+            --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+            --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+            --code: "JetBrains Mono", Consolas, monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--ink);
+            color: var(--text);
+            font-family: var(--body);
+            font-size: 1.02rem;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* faint grid that fades out below the first screen */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 680px;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                linear-gradient(var(--line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line) 1px, transparent 1px);
+            background-size: 56px 56px;
+            opacity: 0.35;
+            -webkit-mask-image: linear-gradient(#000, transparent);
+            mask-image: linear-gradient(#000, transparent);
+        }
+
+        ::selection { background: var(--violet); color: var(--ink); }
+
+        a { color: inherit; text-decoration: none; }
+
+        a:focus-visible {
+            outline: 2px solid var(--violet);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        main { flex: 1; }
+
+        .container { width: min(1120px, 91%); margin-inline: auto; }
+        .accent, h1 span, h2 span { color: var(--violet); }
+
+        /* ===== HEADER ===== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(10, 10, 16, 0.82);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        header > nav, .nav-inner {
+            min-height: 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: var(--display);
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            white-space: nowrap;
+        }
+
+        .logo span { color: var(--violet); }
+
+        .nav-links { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+
+        .nav-links a {
+            display: block;
+            padding: 7px 15px;
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 0.93rem;
+            font-weight: 500;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a.active { color: var(--violet); background: var(--violet-soft); }
+
+        .nav-links a.nav-contact {
+            margin-left: 8px;
+            color: var(--text);
+            border: 1px solid var(--line-strong);
+        }
+        .nav-links a.nav-contact:hover { border-color: var(--violet); color: var(--violet); }
+        .nav-links a.nav-contact.active { background: var(--violet); border-color: var(--violet); color: var(--ink); }
+
+        /* ===== SMALL LABELS ===== */
+        .eyebrow,
+        .section-label,
+        .project-label,
+        .project-number,
+        .hero > .container > .tag {
+            display: inline-block;
+            padding: 5px 14px;
+            border: 1px solid var(--violet-edge);
+            border-radius: 999px;
+            background: var(--violet-soft);
+            color: var(--violet);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            line-height: 1.5;
+        }
+
+        .section-label { margin-bottom: 16px; }
+
+        /* ===== HEADINGS ===== */
+        h1, h2, h3 { font-family: var(--display); color: var(--text); }
+
+        h1 {
+            font-size: clamp(2.7rem, 7vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.02;
+            margin: 20px 0 24px;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.12;
+            margin-bottom: 14px;
+        }
+
+        h3 { font-size: 1.18rem; font-weight: 650; letter-spacing: -0.01em; }
+
+        /* ===== HERO (all pages) ===== */
+        .hero { padding-block: 96px 56px; }
+
+        .hero p,
+        .hero-description {
+            max-width: 64ch;
+            color: var(--muted);
+            font-size: 1.12rem;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 56px;
+            align-items: center;
+            padding-block: 8px;
+        }
+
+        .profile-photo {
+            width: 108px;
+            height: 108px;
+            margin-bottom: 30px;
+            border-radius: 50%;
+            background: var(--surface-2);
+            border: 2px solid var(--violet);
+            box-shadow: 0 0 0 6px var(--violet-soft);
+            overflow: hidden;
+        }
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+        .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin: 34px 0 30px; }
+
+        .hero-tags, .tags, .project-tech { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--violet); }
+
+        /* one orchestrated moment: the hero settles in on load */
+        @keyframes settle { from { opacity: 0; transform: translateY(16px); } }
+        .hero-content > *, .hero > .container > *, .hero.container > *, .hero-panel {
+            animation: settle 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+        }
+        .hero-content > :nth-child(2), .hero > .container > :nth-child(2), .hero.container > :nth-child(2) { animation-delay: 0.08s; }
+        .hero-content > :nth-child(3), .hero > .container > :nth-child(3), .hero.container > :nth-child(3) { animation-delay: 0.16s; }
+        .hero-content > :nth-child(n+4), .hero > .container > :nth-child(n+4), .hero.container > :nth-child(n+4) { animation-delay: 0.24s; }
+        .hero-panel { animation-delay: 0.3s; }
+
+        /* ===== CHIPS ===== */
+        .tag,
+        .tags span,
+        .hero-tags span,
+        .project-tech span {
+            display: inline-block;
+            padding: 4px 13px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: var(--surface-2);
+            color: var(--soft);
+            font-size: 0.82rem;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .tags a span { transition: border-color 0.2s, color 0.2s; }
+        .tags a:hover span { border-color: var(--violet); color: var(--violet); }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 24px;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.96rem;
+            transition: transform 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-primary { background: var(--violet); color: var(--ink); }
+        .btn-primary:hover { background: #bba8ff; }
+        .btn-secondary { border-color: var(--line-strong); color: var(--text); }
+        .btn-secondary:hover { border-color: var(--violet); color: var(--violet); }
+
+        /* ===== CODE PANEL (home) ===== */
+        .hero-panel {
+            padding-bottom: 22px;
+            background: #0d0d16;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            font-family: var(--code);
+            font-size: 0.92rem;
+            overflow: hidden;
+        }
+
+        .panel-top {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--line);
+            background: var(--surface);
+        }
+        .dot { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+        .dot:nth-child(2) { background: #febc2e; }
+        .dot:nth-child(3) { background: #28c840; }
+        .panel-title { margin-left: 12px; color: var(--muted); font-size: 0.82rem; }
+
+        .panel-top + .code-line { margin-top: 18px; }
+        .code-line { padding: 0 24px; line-height: 1.95; color: var(--text); }
+        .code-key { color: var(--violet); }
+        .code-string { color: var(--mint); }
+        .code-value { color: var(--amber); }
+
+        .panel-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 24px 0;
+            padding-top: 16px;
+            border-top: 1px dashed var(--line-strong);
+            color: var(--muted);
+            font-family: var(--body);
+            font-size: 0.86rem;
+        }
+        .status-light {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--mint);
+            box-shadow: 0 0 10px var(--mint);
+        }
+
+        /* ===== SECTIONS ===== */
+        main section + section { border-top: 1px solid var(--line); }
+        main section { padding-block: 84px; }
+        main .hero { padding-block: 96px 56px; }
+        main .hero + section, main .hero + .projects { border-top: 0; padding-top: 24px; }
+        main .hero-layout-wrap { padding-block: 0; }
+        section.hero:has(.hero-layout) { padding-block: 88px 72px; }
+
+        .section-heading { max-width: 720px; margin-bottom: 44px; }
+        .section-heading .eyebrow { margin-bottom: 16px; }
+        .section-heading p, .section-description { color: var(--muted); max-width: 60ch; }
+        .section-description { margin: 0 0 36px; }
+        .section-action { margin-top: 40px; }
+
+        .intro { max-width: 70ch; }
+        .intro p { margin-bottom: 18px; color: var(--soft); font-size: 1.06rem; }
+        .intro .tags { margin-top: 26px; }
+
+        /* intro strip (home) */
+        main section.intro-strip { padding-block: 0; background: var(--surface); }
+        .intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+        .intro-item { padding: 36px 32px; border-left: 1px solid var(--line); }
+        .intro-item:first-child { border-left: 0; padding-left: 0; }
+        .intro-item h3 { font-size: 1.5rem; margin-bottom: 6px; color: var(--violet); }
+        .intro-item p { color: var(--muted); }
+
+        /* ===== CARDS ===== */
+        .card, .skill-card, .project-card, .about-note, .career-card, .contact-box {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 30px;
+            transition: border-color 0.25s;
+        }
+        .card:hover, .skill-card:hover, .project-card:hover { border-color: var(--violet-edge); }
+
+        .grid, .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+        .icon, .skill-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--violet-edge);
+            border-radius: 13px;
+            background: var(--violet-soft);
+            font-size: 1.35rem;
+            line-height: 1;
+        }
+        .skill-icon { color: var(--violet); font-family: var(--display); font-size: 0.95rem; font-weight: 700; }
+
+        .card h3, .skill-card h3 { margin: 20px 0 8px; }
+        .card:not(:has(.icon)) h3 { margin-top: 0; }
+        .card p, .skill-card p { color: var(--muted); font-size: 0.97rem; }
+        .card .tags { margin-top: 20px; }
+
+        .level {
+            display: block;
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 0.84rem;
+            font-weight: 500;
+        }
+        .level::before {
+            content: "";
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            margin-right: 9px;
+            border-radius: 50%;
+            background: var(--mint);
+            vertical-align: middle;
+        }
+
+        .note, .notice {
+            margin-top: 30px;
+            padding: 18px 24px;
+            border-left: 3px solid var(--violet);
+            border-radius: 0 12px 12px 0;
+            background: var(--violet-soft);
+            color: var(--soft);
+        }
+
+        /* home: about + career + closing call */
+        .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; align-items: start; }
+        .about-text p { color: var(--soft); margin-bottom: 18px; max-width: 60ch; }
+        .about-text .btn { margin-top: 10px; }
+        .about-note h3 { margin-bottom: 8px; }
+        .about-note p { color: var(--muted); }
+
+        .career-card {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 32px;
+            padding: 44px;
+            background: var(--surface-2);
+        }
+        .career-card > div { max-width: 640px; }
+        .career-card h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.03em; margin: 14px 0 12px; }
+        .career-card p { color: var(--muted); }
+
+        .contact-box, .contact .container {
+            max-width: 100%;
+            padding: 64px 32px;
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+        }
+        .contact-box { border-radius: 24px; }
+        .contact-box p, .contact p { max-width: 56ch; margin: 0 auto 28px; color: var(--muted); }
+        .contact-box .eyebrow, .contact .eyebrow { margin-bottom: 18px; }
+        .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+        /* ===== PROJECTS ===== */
+        .project-card { display: flex; flex-direction: column; }
+        .project-card h3 { margin: 16px 0 10px; font-size: 1.3rem; }
+        .project-card > p { color: var(--muted); }
+        .project-tech { margin-top: auto; padding-top: 22px; }
+
+        .project-grid { display: grid; gap: 28px; }
+        .project-grid .project-card { padding: 40px; }
+        .project-grid .project-card h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 18px 0 14px; }
+        .project-grid .project-card h3 {
+            margin: 28px 0 12px;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 650;
+        }
+        .project-grid .description { max-width: 72ch; color: var(--muted); }
+        .project-grid .tags { margin-top: 0; }
+
+        .features { columns: 2; column-gap: 40px; }
+        .features li {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 10px;
+            break-inside: avoid;
+            color: var(--soft);
+            font-size: 0.96rem;
+        }
+        .features li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.62em;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            background: var(--violet);
+        }
+        .project-links { margin-top: 32px; }
+
+        /* ===== CONTACT PAGE ===== */
+        main:has(.contact-card) .hero { text-align: center; }
+        main:has(.contact-card) .hero p { margin-inline: auto; }
+
+        .contact-section { padding-block: 24px 90px; }
+        .contact-card {
+            max-width: 720px;
+            margin-inline: auto;
+            padding: 44px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+        }
+        .profile { text-align: center; padding-bottom: 30px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
+        .avatar {
+            width: 92px;
+            height: 92px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 16px;
+            border: 2px solid var(--violet);
+            border-radius: 50%;
+            box-shadow: 0 0 0 6px var(--violet-soft);
+            background: var(--surface-2);
+            color: var(--violet);
+            font-family: var(--display);
+            font-size: 1.7rem;
+            font-weight: 800;
+        }
+        .profile h2 { font-size: 1.8rem; margin-bottom: 2px; }
+        .nickname { color: var(--violet); font-weight: 500; }
+
+        .details { display: grid; gap: 12px; }
+        .detail {
+            padding: 16px 22px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: var(--surface-2);
+            overflow-wrap: anywhere;
+        }
+        .detail-label { display: block; margin-bottom: 2px; color: var(--muted); font-size: 0.84rem; }
+        .detail-value { font-weight: 600; font-size: 1.04rem; }
+        .detail-value a { color: var(--violet); }
+        .detail-value a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+        .buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
+        .contact-card .note {
+            margin: 24px 0 0;
+            padding: 0;
+            border: 0;
+            background: none;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 36px 0;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        footer span { color: var(--violet); }
+        .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; text-align: left; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 22px; }
+        .footer-links a:hover { color: var(--violet); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 960px) {
+            .hero-layout, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 680px) {
+            header > nav, .nav-inner { flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px 0 10px; min-height: 0; }
+            .nav-links { margin-left: -12px; }
+            .nav-links a.nav-contact { margin-left: 0; }
+            main section { padding-block: 60px; }
+            main .hero, section.hero:has(.hero-layout) { padding-block: 52px 36px; }
+            .grid, .projects-grid, .skills-grid, .intro-grid { grid-template-columns: 1fr; }
+            .intro-item, .intro-item:first-child { padding: 26px 0; border-left: 0; border-top: 1px solid var(--line); }
+            .intro-item:first-child { border-top: 0; }
+            .features { columns: 1; }
+            .card, .skill-card, .project-card, .about-note, .career-card, .contact-card, .project-grid .project-card { padding: 24px; }
+            .contact-box, .contact .container { padding: 44px 22px; }
+            .footer-inner { flex-direction: column; align-items: flex-start; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <header class="navbar">
+        <div class="container nav-inner">
+
+            <a href="/" class="logo" aria-label="FakerX home">FAKER<span>X</span></a>
+
+            <nav aria-label="Main navigation">
+                <ul class="nav-links">
+                    <li>
+                        <a href="/" class="active" aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    <li>
+                        <a href="/Skills">Skills</a>
+                    </li>
+                    <li>
+                        <a href="/projects">Projects</a>
+                    </li>
+                    <li>
+                        <a href="/contact" class="nav-contact">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- =========================
+             HERO
+        ========================== -->
+
+        <section class="hero">
+            <div class="container hero-layout">
+
+                <div class="hero-content">
+
+                    <!-- PROFILE PHOTO -->
+                    <div class="profile-photo">
+                        <img
+                            src="{{ url_for('static', path='images/haseeb.png') }}"
+                            alt="Haseeb Khan profile photo"
+                        >
+                    </div>
+
+                    <div class="eyebrow">
+                        &gt; WELCOME TO THE FAKERX PORTFOLIO
+                    </div>
+
+                    <h1>
+                        Haseeb Khan<br>
+                        <span class="accent">
+                            Engineering My Future.
+                        </span>
+                    </h1>
+
+                    <p class="hero-description">
+                        I'm Haseeb Khan, also known as Mr Faker. I build
+                        practical applications using Python, automation,
+                        AI integrations, and backend technologies. Through
+                        hands-on projects and continuous learning, I'm
+                        working toward a career in software engineering
+                        and cybersecurity.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="/projects" class="btn btn-primary">
+                            Explore My Projects →
+                        </a>
+
+                        <a href="/contact" class="btn btn-secondary">
+                            Contact Me
+                        </a>
+                    </div>
+
+                    <div class="hero-tags">
+                        <span class="tag">Python Developer</span>
+                        <span class="tag">AI Automation</span>
+                        <span class="tag">Backend Development</span>
+                        <span class="tag">Cybersecurity Learner</span>
+                    </div>
+
+                </div>
+
+
+                <!-- CODE-STYLE VISUAL PANEL -->
+                <div class="hero-panel">
+
+                    <div class="panel-top">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+
+                        <span class="panel-title">
+                            fakerx_profile.py
+                        </span>
+                    </div>
+
+                    <p class="code-line">
+                        <span class="code-key">class</span>
+                        <span class="code-string"> FakerX</span>:
+                    </p>
+
+                    <p class="code-line">
+                        &nbsp;&nbsp;name =
+                        <span class="code-string">"Haseeb Khan"</span>
+                    </p>
+
+                    <p class="code-line">
+                        &nbsp;&nbsp;alias =
+                        <span class="code-string">"Mr Faker"</span>
+                    </p>
+
+                    <p class="code-line">
+                        &nbsp;&nbsp;focus = [
+                    </p>
+
+                    <p class="code-line">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="code-string">"Python"</span>,
+                    </p>
+
+                    <p class="code-line">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="code-string">"AI Automation"</span>,
+                    </p>
+
+                    <p class="code-line">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="code-string">"Cybersecurity"</span>
+                    </p>
+
+                    <p class="code-line">
+                        &nbsp;&nbsp;]
+                    </p>
+
+                    <p class="code-line">
+                        &nbsp;&nbsp;mindset =
+                        <span class="code-value">"Keep Building"</span>
+                    </p>
+
+                    <div class="panel-status">
+                        <span class="status-light"></span>
+                        Learning, building, improving.
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             QUICK INTRO
+        ========================== -->
+
+        <section class="intro-strip">
+            <div class="container intro-grid">
+
+                <div class="intro-item">
+                    <h3>Build</h3>
+                    <p>Practical projects that solve real problems.</p>
+                </div>
+
+                <div class="intro-item">
+                    <h3>Automate</h3>
+                    <p>Python workflows and AI-powered solutions.</p>
+                </div>
+
+                <div class="intro-item">
+                    <h3>Learn</h3>
+                    <p>Developing skills for a future in cybersecurity.</p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             ABOUT PREVIEW
+        ========================== -->
+
+        <section class="section">
+            <div class="container about-grid">
+
+                <div class="about-text">
+                    <div class="section-heading">
+                        <div class="eyebrow">01 / ABOUT ME</div>
+                        <h2>
+                            More Than Just<br>
+                            <span class="accent">Writing Code.</span>
+                        </h2>
+                    </div>
+
+                    <p>
+                        I'm a developer who enjoys understanding how
+                        systems work, solving problems, and turning ideas
+                        into useful applications.
+                    </p>
+
+                    <p>
+                        My learning focuses on Python development,
+                        business automation, AI integrations, web
+                        technologies, and the foundations of cybersecurity.
+                        I believe practical projects are an important part
+                        of becoming industry-ready.
+                    </p>
+
+                    <a href="/about" class="btn btn-secondary">
+                        More About Me →
+                    </a>
+                </div>
+
+
+                <div class="about-note">
+                    <h3>
+                        <span class="accent">My Approach</span>
+                    </h3>
+
+                    <p>
+                        Understand the problem first. Explore the
+                        mechanism. Build a solution. Test it, improve it,
+                        and learn from the result.
+                    </p>
+
+                    <br>
+
+                    <h3>My Direction</h3>
+
+                    <p>
+                        Continue building real-world software and
+                        automation projects while developing the
+                        technical foundations needed for a long-term
+                        career in cybersecurity.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             SKILLS PREVIEW
+        ========================== -->
+
+        <section class="section" id="skills">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">02 / WHAT I WORK WITH</div>
+
+                    <h2>
+                        My Technical <span class="accent">Focus.</span>
+                    </h2>
+
+                    <p>
+                        Technologies and areas I use or explore while
+                        building projects. Visit the skills page for
+                        more details.
+                    </p>
+                </div>
+
+
+                <div class="skills-grid">
+
+                    <article class="skill-card">
+                        <div class="skill-icon">Py</div>
+                        <h3>Python Development</h3>
+                        <p>
+                            Application logic, reusable code, file
+                            processing, error handling, and automation.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon">AI</div>
+                        <h3>AI Integration</h3>
+                        <p>
+                            Connecting applications with language models,
+                            APIs, prompts, and structured outputs.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon">⚙</div>
+                        <h3>Workflow Automation</h3>
+                        <p>
+                            Automating repetitive tasks, processing data,
+                            and connecting different services.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon">WEB</div>
+                        <h3>Backend Development</h3>
+                        <p>
+                            Working with Python web frameworks, routes,
+                            templates, databases, and authentication.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon">API</div>
+                        <h3>APIs and Data</h3>
+                        <p>
+                            HTTP requests, JSON, REST APIs, data
+                            extraction, validation, and monitoring.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon">SEC</div>
+                        <h3>Cybersecurity</h3>
+                        <p>
+                            Developing security knowledge and working
+                            toward authorized, ethical security testing.
+                        </p>
+                    </article>
+
+                </div>
+
+
+                <div class="section-action">
+                    <a href="/Skills" class="btn btn-secondary">
+                        Explore All Skills →
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             PROJECTS PREVIEW
+        ========================== -->
+
+        <section class="section" id="projects">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">03 / MY WORK</div>
+
+                    <h2>
+                        Projects Built Through<br>
+                        <span class="accent">Practical Learning.</span>
+                    </h2>
+
+                    <p>
+                        A selection of project areas that demonstrate
+                        my experience working with automation, APIs,
+                        AI, and web applications.
+                    </p>
+                </div>
+
+
+                <div class="projects-grid">
+
+                    <article class="project-card">
+                        <span class="project-label">
+                            API AUTOMATION
+                        </span>
+
+                        <h3>FakerX API Monitoring System</h3>
+
+                        <p>
+                            A Python-based project for retrieving API
+                            data, handling request failures, validating
+                            responses, and saving data in structured
+                            formats with logging.
+                        </p>
+
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Requests</span>
+                            <span>JSON</span>
+                            <span>CSV</span>
+                            <span>Logging</span>
+                        </div>
+                    </article>
+
+
+                    <article class="project-card">
+                        <span class="project-label">
+                            AI AUTOMATION
+                        </span>
+
+                        <h3>FakerX WhatsApp AI Agent</h3>
+
+                        <p>
+                            An AI assistant project that connects a
+                            WhatsApp messaging workflow with a Python
+                            backend, a knowledge source, and a language
+                            model.
+                        </p>
+
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Flask</span>
+                            <span>WhatsApp API</span>
+                            <span>Ollama</span>
+                        </div>
+                    </article>
+
+
+                    <article class="project-card">
+                        <span class="project-label">
+                            WEB AUTOMATION
+                        </span>
+
+                        <h3>Browser Automation System</h3>
+
+                        <p>
+                            A browser automation project that interacts
+                            with web pages, follows an automated testing
+                            workflow, and uses a Flask interface to
+                            trigger tasks.
+                        </p>
+
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Selenium</span>
+                            <span>Flask</span>
+                            <span>HTML</span>
+                        </div>
+                    </article>
+
+
+                    <article class="project-card">
+                        <span class="project-label">
+                            CONTENT AUTOMATION
+                        </span>
+
+                        <h3>Cybersecurity LinkedIn Automation</h3>
+
+                        <p>
+                            An automation project focused on preparing
+                            cybersecurity content and integrating with
+                            LinkedIn's supported API workflow.
+                        </p>
+
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>APIs</span>
+                            <span>OAuth</span>
+                            <span>Automation</span>
+                        </div>
+                    </article>
+
+                </div>
+
+
+                <div class="section-action">
+                    <a href="/projects" class="btn btn-primary">
+                        View All Projects →
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             CAREER DIRECTION
+        ========================== -->
+
+        <section class="section">
+            <div class="container">
+
+                <div class="career-card">
+
+                    <div>
+                        <div class="eyebrow">04 / THE LONG-TERM GOAL</div>
+
+                        <h3>
+                            Building Toward <span class="accent">Cybersecurity.</span>
+                        </h3>
+
+                        <p>
+                            My long-term direction is to grow into a
+                            cybersecurity professional by strengthening
+                            my programming, networking, systems, and
+                            security-testing knowledge through legal,
+                            hands-on learning.
+                        </p>
+                    </div>
+
+                    <a href="/about" class="btn btn-secondary">
+                        My Journey →
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             CONTACT CTA
+        ========================== -->
+
+        <section class="section">
+            <div class="container">
+
+                <div class="contact-box">
+
+                    <div class="eyebrow">
+                        &gt; LET'S CONNECT
+                    </div>
+
+                    <h2>
+                        Have an Idea?<br>
+                        <span class="accent">Let's Build Something.</span>
+                    </h2>
+
+                    <p>
+                        Interested in Python automation, AI-powered
+                        applications, or a technical collaboration?
+                        Visit my contact page to get in touch.
+                    </p>
+
+                    <a href="/contact" class="btn btn-primary">
+                        Contact FakerX →
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+        <div class="container footer-inner">
+
+            <p>
+                © 2026 FakerX. Built by Haseeb Khan.
+            </p>
+
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/Skills">Skills</a>
+                <a href="/projects">Projects</a>
+                <a href="/contact">Contact</a>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
+

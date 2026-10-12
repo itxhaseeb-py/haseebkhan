@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Haseeb Khan - FakerX</title>
+
+        <meta name="theme-color" content="#0a0a10">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        /* ===== TOKENS: change the look of the whole site here ===== */
+        :root {
+            --ink: #0a0a10;
+            --surface: #12121b;
+            --surface-2: #191927;
+            --line: #262638;
+            --line-strong: #3a3856;
+            --text: #eceaf6;
+            --soft: #c9c7da;
+            --muted: #9a98b0;
+            --violet: #a58bff;
+            --violet-soft: rgba(165, 139, 255, 0.12);
+            --violet-edge: rgba(165, 139, 255, 0.35);
+            --mint: #66f0c8;
+            --amber: #ffbf69;
+            --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+            --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+            --code: "JetBrains Mono", Consolas, monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--ink);
+            color: var(--text);
+            font-family: var(--body);
+            font-size: 1.02rem;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* faint grid that fades out below the first screen */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 680px;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                linear-gradient(var(--line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line) 1px, transparent 1px);
+            background-size: 56px 56px;
+            opacity: 0.35;
+            -webkit-mask-image: linear-gradient(#000, transparent);
+            mask-image: linear-gradient(#000, transparent);
+        }
+
+        ::selection { background: var(--violet); color: var(--ink); }
+
+        a { color: inherit; text-decoration: none; }
+
+        a:focus-visible {
+            outline: 2px solid var(--violet);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        main { flex: 1; }
+
+        .container { width: min(1120px, 91%); margin-inline: auto; }
+        .accent, h1 span, h2 span { color: var(--violet); }
+
+        /* ===== HEADER ===== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(10, 10, 16, 0.82);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        header > nav, .nav-inner {
+            min-height: 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: var(--display);
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            white-space: nowrap;
+        }
+
+        .logo span { color: var(--violet); }
+
+        .nav-links { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+
+        .nav-links a {
+            display: block;
+            padding: 7px 15px;
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 0.93rem;
+            font-weight: 500;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a.active { color: var(--violet); background: var(--violet-soft); }
+
+        .nav-links a.nav-contact {
+            margin-left: 8px;
+            color: var(--text);
+            border: 1px solid var(--line-strong);
+        }
+        .nav-links a.nav-contact:hover { border-color: var(--violet); color: var(--violet); }
+        .nav-links a.nav-contact.active { background: var(--violet); border-color: var(--violet); color: var(--ink); }
+
+        /* ===== SMALL LABELS ===== */
+        .eyebrow,
+        .section-label,
+        .project-label,
+        .project-number,
+        .hero > .container > .tag {
+            display: inline-block;
+            padding: 5px 14px;
+            border: 1px solid var(--violet-edge);
+            border-radius: 999px;
+            background: var(--violet-soft);
+            color: var(--violet);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            line-height: 1.5;
+        }
+
+        .section-label { margin-bottom: 16px; }
+
+        /* ===== HEADINGS ===== */
+        h1, h2, h3 { font-family: var(--display); color: var(--text); }
+
+        h1 {
+            font-size: clamp(2.7rem, 7vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.02;
+            margin: 20px 0 24px;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.12;
+            margin-bottom: 14px;
+        }
+
+        h3 { font-size: 1.18rem; font-weight: 650; letter-spacing: -0.01em; }
+
+        /* ===== HERO (all pages) ===== */
+        .hero { padding-block: 96px 56px; }
+
+        .hero p,
+        .hero-description {
+            max-width: 64ch;
+            color: var(--muted);
+            font-size: 1.12rem;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 56px;
+            align-items: center;
+            padding-block: 8px;
+        }
+
+        .profile-photo {
+            width: 108px;
+            height: 108px;
+            margin-bottom: 30px;
+            border-radius: 50%;
+            background: var(--surface-2);
+            border: 2px solid var(--violet);
+            box-shadow: 0 0 0 6px var(--violet-soft);
+            overflow: hidden;
+        }
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+        .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin: 34px 0 30px; }
+
+        .hero-tags, .tags, .project-tech { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--violet); }
+
+        /* one orchestrated moment: the hero settles in on load */
+        @keyframes settle { from { opacity: 0; transform: translateY(16px); } }
+        .hero-content > *, .hero > .container > *, .hero.container > *, .hero-panel {
+            animation: settle 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+        }
+        .hero-content > :nth-child(2), .hero > .container > :nth-child(2), .hero.container > :nth-child(2) { animation-delay: 0.08s; }
+        .hero-content > :nth-child(3), .hero > .container > :nth-child(3), .hero.container > :nth-child(3) { animation-delay: 0.16s; }
+        .hero-content > :nth-child(n+4), .hero > .container > :nth-child(n+4), .hero.container > :nth-child(n+4) { animation-delay: 0.24s; }
+        .hero-panel { animation-delay: 0.3s; }
+
+        /* ===== CHIPS ===== */
+        .tag,
+        .tags span,
+        .hero-tags span,
+        .project-tech span {
+            display: inline-block;
+            padding: 4px 13px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: var(--surface-2);
+            color: var(--soft);
+            font-size: 0.82rem;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .tags a span { transition: border-color 0.2s, color 0.2s; }
+        .tags a:hover span { border-color: var(--violet); color: var(--violet); }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 24px;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.96rem;
+            transition: transform 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-primary { background: var(--violet); color: var(--ink); }
+        .btn-primary:hover { background: #bba8ff; }
+        .btn-secondary { border-color: var(--line-strong); color: var(--text); }
+        .btn-secondary:hover { border-color: var(--violet); color: var(--violet); }
+
+        /* ===== CODE PANEL (home) ===== */
+        .hero-panel {
+            padding-bottom: 22px;
+            background: #0d0d16;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            font-family: var(--code);
+            font-size: 0.92rem;
+            overflow: hidden;
+        }
+
+        .panel-top {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--line);
+            background: var(--surface);
+        }
+        .dot { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+        .dot:nth-child(2) { background: #febc2e; }
+        .dot:nth-child(3) { background: #28c840; }
+        .panel-title { margin-left: 12px; color: var(--muted); font-size: 0.82rem; }
+
+        .panel-top + .code-line { margin-top: 18px; }
+        .code-line { padding: 0 24px; line-height: 1.95; color: var(--text); }
+        .code-key { color: var(--violet); }
+        .code-string { color: var(--mint); }
+        .code-value { color: var(--amber); }
+
+        .panel-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 24px 0;
+            padding-top: 16px;
+            border-top: 1px dashed var(--line-strong);
+            color: var(--muted);
+            font-family: var(--body);
+            font-size: 0.86rem;
+        }
+        .status-light {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--mint);
+            box-shadow: 0 0 10px var(--mint);
+        }
+
+        /* ===== SECTIONS ===== */
+        main section + section { border-top: 1px solid var(--line); }
+        main section { padding-block: 84px; }
+        main .hero { padding-block: 96px 56px; }
+        main .hero + section, main .hero + .projects { border-top: 0; padding-top: 24px; }
+        main .hero-layout-wrap { padding-block: 0; }
+        section.hero:has(.hero-layout) { padding-block: 88px 72px; }
+
+        .section-heading { max-width: 720px; margin-bottom: 44px; }
+        .section-heading .eyebrow { margin-bottom: 16px; }
+        .section-heading p, .section-description { color: var(--muted); max-width: 60ch; }
+        .section-description { margin: 0 0 36px; }
+        .section-action { margin-top: 40px; }
+
+        .intro { max-width: 70ch; }
+        .intro p { margin-bottom: 18px; color: var(--soft); font-size: 1.06rem; }
+        .intro .tags { margin-top: 26px; }
+
+        /* intro strip (home) */
+        main section.intro-strip { padding-block: 0; background: var(--surface); }
+        .intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+        .intro-item { padding: 36px 32px; border-left: 1px solid var(--line); }
+        .intro-item:first-child { border-left: 0; padding-left: 0; }
+        .intro-item h3 { font-size: 1.5rem; margin-bottom: 6px; color: var(--violet); }
+        .intro-item p { color: var(--muted); }
+
+        /* ===== CARDS ===== */
+        .card, .skill-card, .project-card, .about-note, .career-card, .contact-box {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 30px;
+            transition: border-color 0.25s;
+        }
+        .card:hover, .skill-card:hover, .project-card:hover { border-color: var(--violet-edge); }
+
+        .grid, .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+        .icon, .skill-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--violet-edge);
+            border-radius: 13px;
+            background: var(--violet-soft);
+            font-size: 1.35rem;
+            line-height: 1;
+        }
+        .skill-icon { color: var(--violet); font-family: var(--display); font-size: 0.95rem; font-weight: 700; }
+
+        .card h3, .skill-card h3 { margin: 20px 0 8px; }
+        .card:not(:has(.icon)) h3 { margin-top: 0; }
+        .card p, .skill-card p { color: var(--muted); font-size: 0.97rem; }
+        .card .tags { margin-top: 20px; }
+
+        .level {
+            display: block;
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 0.84rem;
+            font-weight: 500;
+        }
+        .level::before {
+            content: "";
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            margin-right: 9px;
+            border-radius: 50%;
+            background: var(--mint);
+            vertical-align: middle;
+        }
+
+        .note, .notice {
+            margin-top: 30px;
+            padding: 18px 24px;
+            border-left: 3px solid var(--violet);
+            border-radius: 0 12px 12px 0;
+            background: var(--violet-soft);
+            color: var(--soft);
+        }
+
+        /* home: about + career + closing call */
+        .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; align-items: start; }
+        .about-text p { color: var(--soft); margin-bottom: 18px; max-width: 60ch; }
+        .about-text .btn { margin-top: 10px; }
+        .about-note h3 { margin-bottom: 8px; }
+        .about-note p { color: var(--muted); }
+
+        .career-card {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 32px;
+            padding: 44px;
+            background: var(--surface-2);
+        }
+        .career-card > div { max-width: 640px; }
+        .career-card h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.03em; margin: 14px 0 12px; }
+        .career-card p { color: var(--muted); }
+
+        .contact-box, .contact .container {
+            max-width: 100%;
+            padding: 64px 32px;
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+        }
+        .contact-box { border-radius: 24px; }
+        .contact-box p, .contact p { max-width: 56ch; margin: 0 auto 28px; color: var(--muted); }
+        .contact-box .eyebrow, .contact .eyebrow { margin-bottom: 18px; }
+        .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+        /* ===== PROJECTS ===== */
+        .project-card { display: flex; flex-direction: column; }
+        .project-card h3 { margin: 16px 0 10px; font-size: 1.3rem; }
+        .project-card > p { color: var(--muted); }
+        .project-tech { margin-top: auto; padding-top: 22px; }
+
+        .project-grid { display: grid; gap: 28px; }
+        .project-grid .project-card { padding: 40px; }
+        .project-grid .project-card h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 18px 0 14px; }
+        .project-grid .project-card h3 {
+            margin: 28px 0 12px;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 650;
+        }
+        .project-grid .description { max-width: 72ch; color: var(--muted); }
+        .project-grid .tags { margin-top: 0; }
+
+        .features { columns: 2; column-gap: 40px; }
+        .features li {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 10px;
+            break-inside: avoid;
+            color: var(--soft);
+            font-size: 0.96rem;
+        }
+        .features li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.62em;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            background: var(--violet);
+        }
+        .project-links { margin-top: 32px; }
+
+        /* ===== CONTACT PAGE ===== */
+        main:has(.contact-card) .hero { text-align: center; }
+        main:has(.contact-card) .hero p { margin-inline: auto; }
+
+        .contact-section { padding-block: 24px 90px; }
+        .contact-card {
+            max-width: 720px;
+            margin-inline: auto;
+            padding: 44px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+        }
+        .profile { text-align: center; padding-bottom: 30px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
+        .avatar {
+            width: 92px;
+            height: 92px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 16px;
+            border: 2px solid var(--violet);
+            border-radius: 50%;
+            box-shadow: 0 0 0 6px var(--violet-soft);
+            background: var(--surface-2);
+            color: var(--violet);
+            font-family: var(--display);
+            font-size: 1.7rem;
+            font-weight: 800;
+        }
+        .profile h2 { font-size: 1.8rem; margin-bottom: 2px; }
+        .nickname { color: var(--violet); font-weight: 500; }
+
+        .details { display: grid; gap: 12px; }
+        .detail {
+            padding: 16px 22px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: var(--surface-2);
+            overflow-wrap: anywhere;
+        }
+        .detail-label { display: block; margin-bottom: 2px; color: var(--muted); font-size: 0.84rem; }
+        .detail-value { font-weight: 600; font-size: 1.04rem; }
+        .detail-value a { color: var(--violet); }
+        .detail-value a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+        .buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
+        .contact-card .note {
+            margin: 24px 0 0;
+            padding: 0;
+            border: 0;
+            background: none;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 36px 0;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        footer span { color: var(--violet); }
+        .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; text-align: left; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 22px; }
+        .footer-links a:hover { color: var(--violet); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 960px) {
+            .hero-layout, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 680px) {
+            header > nav, .nav-inner { flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px 0 10px; min-height: 0; }
+            .nav-links { margin-left: -12px; }
+            .nav-links a.nav-contact { margin-left: 0; }
+            main section { padding-block: 60px; }
+            main .hero, section.hero:has(.hero-layout) { padding-block: 52px 36px; }
+            .grid, .projects-grid, .skills-grid, .intro-grid { grid-template-columns: 1fr; }
+            .intro-item, .intro-item:first-child { padding: 26px 0; border-left: 0; border-top: 1px solid var(--line); }
+            .intro-item:first-child { border-top: 0; }
+            .features { columns: 1; }
+            .card, .skill-card, .project-card, .about-note, .career-card, .contact-card, .project-grid .project-card { padding: 24px; }
+            .contact-box, .contact .container { padding: 44px 22px; }
+            .footer-inner { flex-direction: column; align-items: flex-start; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav class="container">
+        <a href="/" class="logo" aria-label="FakerX home">FAKER<span>X</span></a>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/Skills">Skills</a></li>
+            <li><a href="/projects" class="active" aria-current="page">Projects</a></li>
+            <li><a href="/contact" class="nav-contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="hero container">
+        <div class="eyebrow">FakerX · My Work</div>
+
+        <h1>Projects I've <span>Built</span></h1>
+
+        <p>
+            I learn by building practical software. These projects demonstrate
+            my experience with Python, browser automation, APIs, backend
+            development, and AI-powered automation. Explore each project
+            to see its implementation and source code.
+        </p>
+    </section>
+
+    <section class="projects container">
+        <div class="project-grid">
+
+            <!-- PROJECT 1: WHATSAPP AI AGENT -->
+            <article class="project-card">
+                <div class="project-number">PROJECT 01 · AI AUTOMATION</div>
+
+                <h2>FakerX WhatsApp AI Agent</h2>
+
+                <p class="description">
+                    An AI-powered WhatsApp assistant that receives messages,
+                    searches a knowledge base for relevant information,
+                    generates responses, and sends them back through the
+                    WhatsApp Cloud API. It also supports conversation storage
+                    and human handoff when a person needs to take over.
+                </p>
+
+                <h3>Key Features</h3>
+                <ul class="features">
+                    <li>WhatsApp Cloud API integration and Flask webhooks</li>
+                    <li>PDF text extraction and knowledge retrieval</li>
+                    <li>Relevant context supplied to the AI model</li>
+                    <li>SQLite conversation storage</li>
+                    <li>Human handoff and API error handling</li>
+                    <li>Environment variables for sensitive credentials</li>
+                </ul>
+
+                <h3>Technologies</h3>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Flask</span>
+                    <span class="tag">WhatsApp Cloud API</span>
+                    <span class="tag">LLMs</span>
+                    <span class="tag">SQLite</span>
+                    <span class="tag">PDF Processing</span>
+                </div>
+
+                <div class="project-links">
+                    <a class="btn btn-primary"
+                       href="https://github.com/itxhaseeb-py/fakerx-whatsapp-agent"
+                       target="_blank" rel="noopener noreferrer">
+                        View Source Code ↗
+                    </a>
+                </div>
+            </article>
+
+            <!-- PROJECT 2: SELENIUM AUTOMATION -->
+            <article class="project-card">
+                <div class="project-number">PROJECT 02 · WEB AUTOMATION</div>
+
+                <h2>FakerX Selenium Automation</h2>
+
+                <p class="description">
+                    An end-to-end browser automation project that automates
+                    an online shopping workflow. It searches for a product,
+                    verifies product details, adds the item to the cart,
+                    checks cart information, completes checkout fields,
+                    and verifies the final result.
+                </p>
+
+                <h3>Key Features</h3>
+                <ul class="features">
+                    <li>Automated product search and selection</li>
+                    <li>Product name, price, quantity, and cart verification</li>
+                    <li>Explicit waits for browser elements</li>
+                    <li>Checkout form automation</li>
+                    <li>DOM inspection using BeautifulSoup</li>
+                    <li>Exception handling, debugging, and screenshots</li>
+                </ul>
+
+                <h3>Technologies</h3>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Selenium</span>
+                    <span class="tag">BeautifulSoup</span>
+                    <span class="tag">WebDriver</span>
+                    <span class="tag">HTML / DOM</span>
+                </div>
+
+                <div class="project-links">
+                    <a class="btn btn-primary"
+                       href="https://github.com/itxhaseeb-py/FakerX-Selenium-Automation"
+                       target="_blank" rel="noopener noreferrer">
+                        View Source Code ↗
+                    </a>
+                </div>
+            </article>
+
+            <!-- PROJECT 3: BANK MANAGEMENT -->
+            <article class="project-card">
+                <div class="project-number">PROJECT 03 · PYTHON / OOP</div>
+
+                <h2>Python Bank Management System</h2>
+
+                <p class="description">
+                    A command-line banking application built with Python
+                    and object-oriented programming. It models basic
+                    banking operations and separates account-related
+                    responsibilities into classes.
+                </p>
+
+                <h3>Key Features</h3>
+                <ul class="features">
+                    <li>Create bank accounts with generated account numbers</li>
+                    <li>Log in using an account number and PIN</li>
+                    <li>Deposit and withdraw funds</li>
+                    <li>Transfer money between accounts</li>
+                    <li>Check balances and display account details</li>
+                    <li>Search for and manage accounts</li>
+                </ul>
+
+                <h3>Technologies</h3>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">OOP</span>
+                    <span class="tag">Classes & Objects</span>
+                    <span class="tag">Encapsulation</span>
+                    <span class="tag">CLI</span>
+                </div>
+
+                <div class="project-links">
+                    <a class="btn btn-primary"
+                       href="https://github.com/itxhaseeb-py/Python-Bank-Management-System"
+                       target="_blank" rel="noopener noreferrer">
+                        View Source Code ↗
+                    </a>
+                </div>
+            </article>
+
+            <!-- PROJECT 4: API AUTOMATION -->
+            <article class="project-card">
+                <div class="project-number">PROJECT 04 · API AUTOMATION</div>
+
+                <h2>FakerX API Automation</h2>
+
+                <p class="description">
+                    A modular Python application that retrieves product
+                    data from an external API, validates the response,
+                    processes the records, and saves the results in
+                    JSON and CSV formats. It includes retry handling,
+                    structured logging, and error management.
+                </p>
+
+                <h3>Key Features</h3>
+                <ul class="features">
+                    <li>HTTP requests using a reusable Requests session</li>
+                    <li>Retry handling for temporary API failures</li>
+                    <li>Timeout, connection, and HTTP error handling</li>
+                    <li>Response structure and data-type validation</li>
+                    <li>Raw and processed data saved separately</li>
+                    <li>JSON/CSV export and application logging</li>
+                </ul>
+
+                <h3>Technologies</h3>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Requests</span>
+                    <span class="tag">REST APIs</span>
+                    <span class="tag">JSON</span>
+                    <span class="tag">CSV</span>
+                    <span class="tag">Logging</span>
+                </div>
+
+                <div class="project-links">
+                    <a class="btn btn-primary"
+                       href="https://github.com/itxhaseeb-py/FakerX-API-Automation"
+                       target="_blank" rel="noopener noreferrer">
+                        View Source Code ↗
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="container">
+            <div class="eyebrow">Let's Connect</div>
+            <h2>Interested in My Work?</h2>
+
+            <p>
+                Visit my GitHub profile to explore my code and follow
+                my development journey. You can also connect with me
+                on LinkedIn for professional updates and opportunities.
+            </p>
+
+            <div class="contact-links">
+                <a class="btn btn-primary"
+                   href="https://github.com/itxhaseeb-py"
+                   target="_blank" rel="noopener noreferrer">
+                    GitHub Profile ↗
+                </a>
+
+                <a class="btn btn-secondary"
+                   href="https://www.linkedin.com/in/haseebkhan-cybersecurity/"
+                   target="_blank" rel="noopener noreferrer">
+                    LinkedIn Profile ↗
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>Designed and built by Haseeb Khan · <span>FakerX 🎭</span></p>
+</footer>
+
+</body>
+</html>

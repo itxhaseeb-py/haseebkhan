@@ -1,0 +1,22 @@
+
+# Python virtual environments
+venv/
+.venv/
+venve/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Secret environment variables
+.env
+.env.*
+
+# Vercel local configuration
+.vercel/
+
+# IDE settings
+.vscode/
+
+# Local log files
+*.log
