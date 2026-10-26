@@ -59,6 +59,11 @@ def skills(request: Request):
         context={}
     )
 
+@app.route("/google7daf1e08afe0f806.html")
+def google_verify():
+    return render_template("google7daf1e08afe0f806.html")
+
+
 
 
 @app.get("/contact")
